@@ -1,21 +1,29 @@
 import type { Plugin } from 'vite';
 
 /**
- * The app loads nothing from anywhere but its own origin, so it can afford a
- * tight policy. 'unsafe-inline' is only there for styles: antd injects its
- * component CSS into <style> tags at runtime.
+ * The app loads nothing from anywhere but its own origin and Google Analytics,
+ * so it can afford a tight policy. 'unsafe-inline' is only there for styles:
+ * antd injects its component CSS into <style> tags at runtime. Note it is
+ * deliberately absent from script-src — src/app/analytics.ts bootstraps gtag
+ * from bundled code precisely so no inline script is needed.
  *
  * Build-only — the dev server needs 'unsafe-eval' and a websocket for HMR.
- * Applied to the web target alone: under file://, which the desktop build
- * uses, the origin is opaque and 'self' matches nothing.
  */
+
+// Only what gtag.js actually needs. img-src is required because GA falls back
+// to a pixel beacon when fetch/sendBeacon is unavailable.
+const GA_SCRIPT = 'https://www.googletagmanager.com';
+const GA_CONNECT =
+  'https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com';
+const GA_IMG = 'https://*.google-analytics.com https://www.googletagmanager.com';
+
 const POLICY = [
   "default-src 'self'",
-  "script-src 'self'",
+  `script-src 'self' ${GA_SCRIPT}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  `img-src 'self' data: ${GA_IMG}`,
   "media-src 'self' data:",
-  "connect-src 'self'",
+  `connect-src 'self' ${GA_CONNECT}`,
   "worker-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",

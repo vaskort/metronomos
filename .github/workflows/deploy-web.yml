@@ -35,7 +35,13 @@ jobs:
       # Served from the root of metronomos.io, so no VITE_BASE sub-path is
       # needed. Set VITE_BASE=/<repo>/ if you ever serve from a project page
       # instead of the custom domain.
+      #
+      # VITE_GA_ID is a repository *variable*, not a secret: GA measurement IDs
+      # are public by design. If it is unset the build still succeeds and simply
+      # ships without analytics.
       - name: Build
+        env:
+          VITE_GA_ID: ${{ vars.VITE_GA_ID }}
         run: npx vite build
 
       - uses: actions/configure-pages@v5
