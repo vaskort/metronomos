@@ -16,8 +16,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/*.png'],
       manifest: {
-        name: 'TempoSonus — Metronome',
-        short_name: 'TempoSonus',
+        name: 'Metronomos — Online Metronome',
+        short_name: 'Metronomos',
         description:
           'A precise and reliable metronome for musicians. Works offline.',
         theme_color: '#1890ff',

@@ -1,7 +1,12 @@
-# TempoSonus
+# Metronomos
 
 A precise and reliable metronome for musicians — a static, installable PWA
-that works offline.
+that works offline. Live at [metronomos.io](https://metronomos.io).
+
+Previously released as **TempoSonus**, a macOS app on the Mac App Store built
+with Electron. This repo is the web version, and keeps the same audio engine —
+which explains why the timing code is more elaborate than a metronome might
+otherwise warrant.
 
 ## Getting started
 

@@ -1,11 +1,10 @@
 name: Deploy web
 
-# Manual by default. Flip on the `push` trigger below once the DNS for
-# metronomos.io resolves and the first deploy looks right.
+# Deploys on every push to main. Also dispatchable by hand from the Actions tab.
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
 permissions:
   contents: read
