@@ -1,0 +1,61 @@
+{
+  "name": "temposonus",
+  "version": "1.1.0",
+  "private": true,
+  "description": "A precise and reliable metronome application for musicians",
+  "keywords": [
+    "metronome",
+    "precise",
+    "reliable"
+  ],
+  "homepage": "https://metronomos.io",
+  "bugs": {
+    "url": "https://github.com/vaskort/metronomos/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaskort/metronomos.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Vasilis Kortsimelidis",
+    "email": "vaskort@gmail.com",
+    "url": "https://vaskort.com"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.3.7",
+    "antd": "^5.17.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "jsdom": "^24.0.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-pwa": "^0.20.0",
+    "vitest": "^1.6.0"
+  }
+}

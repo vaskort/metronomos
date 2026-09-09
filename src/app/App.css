@@ -1,0 +1,81 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  /* Stop the pull-to-refresh / rubber-band scroll: the app is a single
+     non-scrolling screen and the gesture only ever fires by accident. */
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+.app-shell {
+  /* 100vh is measured against the *largest* viewport on mobile Safari, so the
+     bottom of the layout sits behind the URL bar. dvh tracks the real one. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  box-sizing: border-box;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+.app-panel {
+  /* margin:auto rather than justify/align-content: it centres the panel the
+     same way, but when the content is taller than the viewport (a phone in
+     landscape) it overflows in both directions instead of clipping the top
+     out of reach. */
+  margin: auto;
+  width: 100%;
+  /* The controls stop being usable long before they stop being readable, so
+     the panel keeps roughly the proportions of the desktop window instead of
+     stretching across a monitor. */
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  /* Breathes on a tall screen, tightens up on a short one, rather than
+     spreading the rows across whatever height is going. */
+  gap: clamp(12px, 3.5vh, 28px);
+}
+
+/* Removes the ~300ms tap delay and the grey flash, both of which make a
+   Tap Tempo button feel broken. */
+button,
+.ant-radio-button-wrapper,
+.ant-checkbox-wrapper {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Repeated tapping on a button selects its label text on iOS. */
+.tap-tempo {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Keep the two pitch options on one row instead of wrapping mid-group. */
+.sound-selector {
+  display: flex;
+  width: 100%;
+}
+
+.sound-selector .ant-radio-button-wrapper {
+  flex: 1;
+  text-align: center;
+}
+
+@media (max-width: 575px) {
+  /* Comfortable thumb targets on a phone. */
+  .app-shell .ant-btn-lg {
+    height: 56px;
+    font-size: 17px;
+  }
+
+  .app-shell .ant-slider {
+    /* antd's default 4px rail is a hard target to grab. */
+    margin-block: 14px;
+  }
+}

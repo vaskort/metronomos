@@ -1,0 +1,49 @@
+name: Deploy web
+
+# Manual by default. Flip on the `push` trigger below once the DNS for
+# metronomos.io resolves and the first deploy looks right.
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; queue instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Served from the root of metronomos.io, so no VITE_BASE sub-path is
+      # needed. Set VITE_BASE=/<repo>/ if you ever serve from a project page
+      # instead of the custom domain.
+      - name: Build
+        run: npx vite build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-web
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

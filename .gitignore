@@ -1,0 +1,29 @@
+# Logs
+logs
+*.log
+npm-debug.log.*
+
+# Coverage / caches
+coverage
+.eslintcache
+
+# Dependencies
+node_modules
+
+# Build output
+dist-web
+dev-dist
+.vite
+
+# Editors / OS
+.idea
+.DS_Store
+
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.p8
+*.key
