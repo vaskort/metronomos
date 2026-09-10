@@ -25,6 +25,29 @@ interface ScheduledBeat {
 }
 
 /**
+ * WebKit's AudioSession API, not yet in lib.dom. Safari 16.4+ only, hence
+ * optional — everywhere else the property is simply absent.
+ */
+type NavigatorWithAudioSession = Navigator & {
+  audioSession?: { type: 'auto' | 'playback' | 'ambient' | 'play-and-record' };
+};
+
+/**
+ * iOS routes Web Audio through the "ambient" audio session by default, which
+ * the physical ringer switch silences — so the metronome looks like it is
+ * running but makes no sound. (HTML5 <audio> is exempt; Web Audio is not.)
+ * Declaring "playback" says this is deliberate media that should ignore the
+ * mute switch.
+ *
+ * Must be set once before the context exists; flipping it mid-session
+ * confuses iOS. A no-op on every other platform.
+ */
+function claimPlaybackAudioSession(): void {
+  const nav = navigator as NavigatorWithAudioSession;
+  if (nav.audioSession) nav.audioSession.type = 'playback';
+}
+
+/**
  * Web Audio metronome using the standard lookahead pattern: a coarse timer
  * (in a worker) periodically hands the next slice of beats to the audio
  * clock, which plays them with sample accuracy. Nothing about the timing
@@ -64,6 +87,8 @@ export default class MetronomeEngine {
    */
   async prepare(): Promise<void> {
     if (!this.ctx) {
+      claimPlaybackAudioSession();
+
       const Ctor =
         window.AudioContext ??
         (window as unknown as { webkitAudioContext?: typeof AudioContext })

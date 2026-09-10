@@ -60,22 +60,12 @@ up to a full lookahead window early.
 
 `src/app/audio/schedule.ts` holds the pure timing maths and is unit tested.
 
-## Deploying
+### Security headers
 
-`npm run build` produces a fully static `dist-web/`. Any static host will do.
-
-- **GitHub Pages** — `.github/workflows/deploy-web.yml` is ready but runs only
-  on manual dispatch. Enable the `push` trigger once you have confirmed the
-  first deploy. `public/CNAME` points the site at `metronomos.io`; because
-  that is a custom domain the site is served from the root, so no `VITE_BASE`
-  is needed. Set `VITE_BASE=/<repo>/` if you ever serve from a project page.
-- **Netlify / Cloudflare Pages** — build `npm run build`, publish `dist-web`.
-  `public/_headers` is picked up automatically.
-
-Most of the Content-Security-Policy is injected into `index.html` at build
-time. `frame-ancestors` cannot be set from a `<meta>` tag, so it lives in
-`public/_headers` — which means **GitHub Pages cannot apply it**, as it does
-not support custom headers.
+`vite.csp.ts` injects the Content-Security-Policy into `index.html` at build
+time. `frame-ancestors` is the one exception — browsers ignore it in a `<meta>`
+tag, so it lives in `public/_headers` instead, and applies only on hosts that
+serve custom headers.
 
 ## Licence
 

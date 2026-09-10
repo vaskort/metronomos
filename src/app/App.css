@@ -5,6 +5,12 @@ body,
 }
 
 body {
+  /* antd styles its own components but we never import its reset, so plain
+     elements — the footer links — were falling back to the UA default serif.
+     This is antd's own seed token stack, so the two now match exactly. */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   margin: 0;
   /* Stop the pull-to-refresh / rubber-band scroll: the app is a single
      non-scrolling screen and the gesture only ever fires by accident. */
@@ -65,6 +71,50 @@ button,
 .sound-selector .ant-radio-button-wrapper {
   flex: 1;
   text-align: center;
+}
+
+/* Support links. Recessive by design, but rgba(0,0,0,0.65) still clears ~7:1 on
+   white, so it stays readable. Hover and keyboard focus go to full text colour
+   rather than the brand blue, which is only ~3.1:1 and would fail AA. A colour
+   change rather than `opacity` keeps that contrast predictable. */
+.app-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.app-footer a {
+  color: rgba(0, 0, 0, 0.65);
+  text-decoration: none;
+}
+
+.app-footer a:hover,
+.app-footer a:focus-visible {
+  color: rgba(0, 0, 0, 0.88);
+  text-decoration: underline;
+}
+
+.app-footer span {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* On a roomy screen the footer leaves the flow and pins to the bottom. The
+   height condition is the important half: the panel is vertically centred, so
+   on a short window a fixed footer would sit on top of the controls. Below
+   that, it stays the last row of .app-panel and inherits the panel's gap —
+   which is also exactly the behaviour wanted on a phone. */
+@media (min-width: 576px) and (min-height: 600px) {
+  .app-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 8px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
 }
 
 @media (max-width: 575px) {

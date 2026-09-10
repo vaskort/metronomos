@@ -9,6 +9,11 @@ const loadAnalytics = async () => {
   return (await import('./analytics')).initAnalytics;
 };
 
+const loadTrackEvent = async () => {
+  vi.resetModules();
+  return (await import('./analytics')).trackEvent;
+};
+
 describe('initAnalytics', () => {
   beforeEach(() => {
     document.head.innerHTML = '';
@@ -36,6 +41,24 @@ describe('initAnalytics', () => {
     (await loadAnalytics())();
 
     expect(gtagScripts()).toHaveLength(0);
+    expect(window.dataLayer).toBeUndefined();
+  });
+});
+
+describe('trackEvent', () => {
+  beforeEach(() => {
+    delete window.dataLayer;
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('queues nothing while analytics is disabled', async () => {
+    vi.stubEnv('VITE_GA_ID', 'G-TEST123456');
+
+    (await loadTrackEvent())('donate_click', { destination: 'x' });
+
     expect(window.dataLayer).toBeUndefined();
   });
 });
