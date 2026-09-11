@@ -8,15 +8,67 @@
     />
     <meta
       name="description"
-      content="A precise and reliable metronome for musicians. Works offline, installs to your home screen."
+      content="A free online metronome for musicians. Precise BPM from 20 to 400, tap tempo, and it works offline once loaded."
     />
+    <link rel="canonical" href="https://metronomos.io/" />
     <meta name="theme-color" content="#1890ff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Metronomos" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png" />
     <link rel="apple-touch-icon" href="/icons/icon-256.png" />
-    <title>Metronomos — Online Metronome</title>
+    <title>Online Metronome — Free, Precise, Works Offline | Metronomos</title>
+
+    <!-- Absolute URLs: Open Graph consumers do not resolve relative paths. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Metronomos" />
+    <meta property="og:url" content="https://metronomos.io/" />
+    <meta property="og:title" content="Metronomos — Free Online Metronome" />
+    <meta
+      property="og:description"
+      content="A free online metronome for musicians. Precise BPM from 20 to 400, tap tempo, and it works offline once loaded."
+    />
+    <meta property="og:image" content="https://metronomos.io/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Metronomos — a free online metronome"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Metronomos — Free Online Metronome" />
+    <meta
+      name="twitter:description"
+      content="A free online metronome for musicians. Precise BPM from 20 to 400, tap tempo, and it works offline once loaded."
+    />
+    <meta name="twitter:image" content="https://metronomos.io/og-image.jpg" />
+
+    <!-- A data block, not a script: the HTML spec's "prepare the script
+         element" algorithm returns at step 13 for an unrecognised type, eight
+         steps before the CSP check, so script-src never applies to it. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Metronomos",
+        "url": "https://metronomos.io/",
+        "description": "A free online metronome for musicians. Precise BPM from 20 to 400, tap tempo, and it works offline once loaded.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript and the Web Audio API.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Vasilis Kortsimelidis",
+          "url": "https://vaskort.com"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -60,13 +60,6 @@ up to a full lookahead window early.
 
 `src/app/audio/schedule.ts` holds the pure timing maths and is unit tested.
 
-### Security headers
-
-`vite.csp.ts` injects the Content-Security-Policy into `index.html` at build
-time. `frame-ancestors` is the one exception — browsers ignore it in a `<meta>`
-tag, so it lives in `public/_headers` instead, and applies only on hosts that
-serve custom headers.
-
 ## Licence
 
 MIT — see [LICENSE](LICENSE).

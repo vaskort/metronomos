@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Single-page app, so a single URL. No <lastmod>: a hand-maintained date
+     that goes stale is a worse signal than no date at all. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://metronomos.io/</loc>
+  </url>
+</urlset>

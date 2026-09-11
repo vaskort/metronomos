@@ -18,6 +18,22 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+/* The <h1> exists for the document outline and for crawlers — the visible
+   title is the app itself, so showing it would just be a redundant heading.
+   clip-path over `display: none`, which would take it out of the a11y tree
+   too, and over `text-indent`, which leaves a focusable box behind. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .app-shell {
   /* 100vh is measured against the *largest* viewport on mobile Safari, so the
      bottom of the layout sits behind the URL bar. dvh tracks the real one. */

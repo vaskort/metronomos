@@ -51,7 +51,9 @@ export default defineConfig({
   worker: { format: 'iife' },
   build: {
     outDir: 'dist-web',
-    sourcemap: true,
+    // Not shipped: the map is ~2.2 MB, publishes the original source, and is
+    // only ever wanted locally — `vite build --sourcemap` covers that case.
+    sourcemap: false,
     assetsInlineLimit: 0, // never inline the .wav samples
   },
   server: { port: 5173 },
